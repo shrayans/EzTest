@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.prateek.testmp.TestEntryActivity">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:text="Enter details of Test"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="42dp"
+            android:layout_toStartOf="@+id/textView2"
+            android:text="Name:-"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/TestNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView4"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:hint="Enter name of test"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_below="@+id/TestNameEditText"
+            android:layout_marginTop="19dp"
+            android:text="Total Question:-"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView4"
+            android:layout_below="@+id/textView4"
+            android:ems="10"
+            android:inputType="numberSigned"
+            android:id="@+id/TotalQuestionEditText" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/TotalQuestionEditText"
+            android:layout_below="@+id/TotalQuestionEditText"
+            android:text="No. of Students for test "
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/TotalNoOfStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_below="@+id/textView6"
+            android:layout_marginTop="11dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/NextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView6"
+            android:layout_below="@+id/TotalNoOfStudent"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="11dp"
+            android:onClick="clickOnNextButton"
+            android:text="Next" />
+    </RelativeLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/button_addQuestion"
+            android:layout_width="127dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="buttonClicked"
+            android:text="Add Question"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="349dp"
+            android:layout_height="230dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_question">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="349dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_question">
+
+                <EditText
+                    android:id="@+id/edit_text_option1"
+                    android:layout_width="match_parent"
+                    android:layout_height="71dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Option A"
+                    android:inputType="textPersonName"
+                    android:textIsSelectable="false" />
+
+                <EditText
+                    android:id="@+id/edit_text_option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="71dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Option B"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/edit_text_option3"
+                    android:layout_width="match_parent"
+                    android:layout_height="71dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Option C"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/edit_text_option4"
+                    android:layout_width="match_parent"
+                    android:layout_height="71dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Option D"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/edit_text_correctOption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Correct Option"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/edit_text_question"
+            android:layout_width="349dp"
+            android:layout_height="187dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Question"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/QuestionNoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Question no :- "
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
