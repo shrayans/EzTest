@@ -42,7 +42,7 @@ public class CustomAdapter extends ArrayAdapter<User> {
 
         return super.getCount();
     }
-//Check
+//Check02
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
