@@ -28,6 +28,7 @@ public class TestEntryActivity extends AppCompatActivity {
 
     EditText TestNameEditText,TotalQuestionEditText,TotalNoOfStudent;
     RelativeLayout relativeLayout;
+
     ConstraintLayout constraintLayout;
     TextView QuestionNoTextView;
     EditText Question;

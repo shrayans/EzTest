@@ -1,6 +1,12 @@
 package com.example.prateek.testmp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,92 +18,64 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 
 public class UserListActivity extends AppCompatActivity {
 
-    DBManager dbManager = new DBManager();
-
-    ArrayList<User> userArrayList = new ArrayList<>();
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_list);
-        try {
-            methodF();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void methodF(){
-
-        Intent intent = getIntent();
-        final String userType = intent.getStringExtra("userType");
-        //Log.i("UserType**********",userType);
-
-        String[] items = {"Shree", "Shrayans", "abc", "kamlesh", "vaidik", "raju"};
-        Log.i("UserTypeValueFrom****", userType);
+        private SectionsPageAdapter sectionsPageAdapter;
+        private ViewPager viewPager;
 
 
-        try {
-            dbManager.getUserListFromDB(userType, new MyCallback() {
-                @Override
-                public void onCallback(ArrayList<User> value) {
 
-                    userArrayList = value;
-
-                    callMe();
-                }
-
-            });
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_user_list);
 
 
-           // Log.i("ArraySize", userArrayList.size() + "");
 
-           // Log.i("UserTypeValue-----", userArrayList.get(1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+            sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-    public void callMe() {
+            viewPager = (ViewPager) findViewById(R.id.container);
 
-        try {
-
-            Log.i("Size Of Array",userArrayList.size()+"");
-            final User user = userArrayList.get(0);
-
-            Log.i("FullNAME", user.Full_Name);
-            Log.i("ProfileImage",user.profileImage);
+            sectionsPageAdapter.addFragment(new teacher_list_fragment(), "Teachers");
+            sectionsPageAdapter.addFragment(new student_list_fragment(), "Students");
 
 
-            ArrayAdapter arrayAdapter = new CustomAdapter(this, userArrayList);
+            viewPager.setAdapter(sectionsPageAdapter);
 
-            ListAdapter shreeAdapter = new CustomAdapter(this, userArrayList);
-            ListView shreeListView = (ListView) findViewById(R.id.userListView);
-
-            shreeListView.setAdapter(shreeAdapter);
-
-            shreeListView.setOnItemClickListener(
-
-                    new AdapterView.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                            User user1=(User) adapterView.getItemAtPosition(i);
-                            String item = user1.Full_Name;
-                            Toast.makeText(UserListActivity.this, item, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(viewPager);
         }
 
+        public class SectionsPageAdapter extends FragmentPagerAdapter {
+
+            private final List<Fragment> mFragmentsList = new ArrayList<>();
+            private final List<String> mFragmentTitleList = new ArrayList<>();
+
+            public SectionsPageAdapter(FragmentManager fm) {
+                super(fm);
+            }
+
+            public void addFragment(Fragment fragment, String title) {
+                mFragmentsList.add(fragment);
+                mFragmentTitleList.add(title);
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mFragmentTitleList.get(position);
+            }
+
+            @Override
+            public android.support.v4.app.Fragment getItem(int position) {
+                return mFragmentsList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return mFragmentsList.size();
+            }
+        }
     }
-}

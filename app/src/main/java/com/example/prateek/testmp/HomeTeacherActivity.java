@@ -8,7 +8,7 @@ import android.view.View;
 
 public class HomeTeacherActivity extends AppCompatActivity {
 
-    String userType="Teachers";
+    String userType="Student";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

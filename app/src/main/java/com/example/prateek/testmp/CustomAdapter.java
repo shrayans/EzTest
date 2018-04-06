@@ -2,8 +2,11 @@ package com.example.prateek.testmp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by prateek on 3/11/18.
@@ -42,40 +50,50 @@ public class CustomAdapter extends ArrayAdapter<User> {
 
         return super.getCount();
     }
-//Check03
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        final User user;
+
         LayoutInflater shreeInflater = LayoutInflater.from(getContext());
         View customView = shreeInflater.inflate(R.layout.custom_userlist_layout, parent, false);
 
-        TextView shreeText = (TextView) customView.findViewById(R.id.shreeText);
-        ImageView profile_image = (ImageView) customView.findViewById(R.id.profile_image);
+        TextView userTextView = (TextView) customView.findViewById(R.id.shreeText);
+        final ImageView profile_image = (ImageView) customView.findViewById(R.id.profile_image);
 
         if (data.size() >= 0) {
             storage=FirebaseStorage.getInstance();
             try {
-                User user = (User)data.get(position);
+                user = (User)data.get(position);
 
                 String string = user.Full_Name;
 
-                System.out.print(string);
-
-                Log.i("FullNAmememesdd", string);
-
-                shreeText.setText(string);
+                userTextView.setText(string);
                 profile_image.setImageResource(R.drawable.defaultuserimagemage);
 
                 if(!user.profileImage.equals("")) {
 
                     StorageReference storageReference = storage.getReferenceFromUrl(user.profileImage);
+//
+//                    Glide.with(getContext())
+//                            .using(new FirebaseImageLoader())
+//                            .load(storageReference)
+//
+//                            .placeholder(R.drawable.defaultuserimagemage)
+//                            .into(profile_image);
 
-                    Glide.with(getContext())
-                            .using(new FirebaseImageLoader())
-                            .load(storageReference)
-                            .placeholder(R.drawable.defaultuserimagemage)
-                            .into(profile_image);
+                    Glide.with(getContext()).using(new FirebaseImageLoader()).load(storageReference).asBitmap().centerCrop().into(new BitmapImageViewTarget(profile_image) {
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            ClassLoader context;
+                            RoundedBitmapDrawable circularBitmapDrawable =
+                                    RoundedBitmapDrawableFactory.create(getContext().getResources(), resource);
+                            circularBitmapDrawable.setCircular(true);
+                            profile_image.setImageDrawable(circularBitmapDrawable);
+                        }
+                    });
 
                 }
             }catch(Exception e){
@@ -84,12 +102,23 @@ public class CustomAdapter extends ArrayAdapter<User> {
 
         }
         else {
-            shreeText.setText("No users");
+            userTextView.setText("No users");
         }
+
+
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return customView;
 
     }
 
+    void goToProfileActivity(){
+
+    }
 
 }

@@ -24,7 +24,11 @@
         <activity android:name=".TestEntryActivity" />
         <activity android:name=".HomeTeacherActivity" />
         <activity android:name=".HomeStudentActivity" />
-        <activity android:name=".UserListActivity"></activity>
+        <activity
+            android:name=".UserListActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".OngoingTestActivity"></activity>
     </application>
 
 </manifest>

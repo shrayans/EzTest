@@ -1,6 +1,8 @@
 package com.example.prateek.testmp;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 
     public String email;
     public String Full_Name;

@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         //getting parameters
 
-        String email = UserEmailEditText.getText().toString();
-        String password= PasswordEditText.getText().toString();
+        String email = UserEmailEditText.getText().toString().trim();
+        String password= PasswordEditText.getText().toString().trim();
 
         //checking parameters
         if(TextUtils.isEmpty(email)){
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
         //if user is already login
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            Intent intent = new Intent(MainActivity.this, HomeTeacherActivity.class);
+            Intent intent = new Intent(MainActivity.this, HomeStudentActivity.class);
             startActivity(intent);
         }
 
