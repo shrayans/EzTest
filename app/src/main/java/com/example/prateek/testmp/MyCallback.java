@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 
 public interface MyCallback {
-    void onCallback(ArrayList<User> value);
+    void onCallback(ArrayList<Object> value);
+
+    void onCallbackString(String string);
 }
 

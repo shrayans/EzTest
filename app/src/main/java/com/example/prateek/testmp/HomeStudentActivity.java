@@ -87,9 +87,19 @@ public class HomeStudentActivity extends AppCompatActivity {
         testListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(HomeStudentActivity.this, OngoingTestActivity.class);
-                intent.putExtra("test_uid", fullTestUID.get(position));
-                startActivity(intent);
+
+                try {
+                    Intent intent = new Intent(HomeStudentActivity.this, OngoingTestActivity.class);
+
+                    intent.putExtra("test_uid", fullTestUID.get(position));
+
+                    Log.e("msg",fullTestUID.get(position));
+
+                    startActivity(intent);
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
     }

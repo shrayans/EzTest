@@ -31,12 +31,14 @@ import static android.support.v4.content.ContextCompat.startActivity;
  * Created by prateek on 3/11/18.
  */
 
-public class CustomAdapter extends ArrayAdapter<User> {
+public class CustomAdapter extends ArrayAdapter<Object> {
 
     public ArrayList data= new ArrayList();
     FirebaseStorage storage;
 
-    public CustomAdapter(@NonNull Context context, ArrayList<User> arrayList) {
+    public CustomAdapter(@NonNull Context context, ArrayList<Object> arrayList) {
+
+
         super(context,R.layout.custom_userlist_layout, arrayList);
         data=arrayList;
         Log.i("Size of Array",arrayList.size()+"");

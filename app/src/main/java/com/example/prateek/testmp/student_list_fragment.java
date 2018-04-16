@@ -24,7 +24,7 @@ public class student_list_fragment extends Fragment {
 
     DBManager dbManager = new DBManager();
 
-    ArrayList<User> userArrayList = new ArrayList<>();
+    ArrayList<Object> userArrayList = new ArrayList<>();
 
     ProgressDialog progressDialog;
 
@@ -56,23 +56,57 @@ public class student_list_fragment extends Fragment {
         progressDialog.setMessage("Loading List");
         progressDialog.show();
 
-//        Intent intent = getIntent();
-//        final String userType = intent.getStringExtra("userType");
-//        //Log.i("UserType**********",userType);
-//
-//        // String[] items = {"Shree", "Shrayans", "abc", "kamlesh", "vaidik", "raju"};
-//        Log.i("UserTypeValueFrom****", userType);
-
 
         try {
             dbManager.getUserListFromDB("Student", new MyCallback() {
                 @Override
-                public void onCallback(ArrayList<User> value) {
+                public void onCallback(ArrayList<Object> value) {
 
-                    userArrayList = value;
+                    userArrayList =  value;
 
-                    callMe();
+
+
+                    if(userArrayList.size()!=0) {
+
+                        try {
+
+                            ArrayAdapter arrayAdapter = new CustomAdapter(getContext(), userArrayList);
+
+                            ListAdapter shreeAdapter = new CustomAdapter(getContext(), userArrayList);
+                            ListView shreeListView = (ListView) getView().findViewById(R.id.userListView);
+
+                            shreeListView.setAdapter(shreeAdapter);
+
+                            shreeListView.setOnItemClickListener(
+
+                                    new AdapterView.OnItemClickListener() {
+
+                                        @Override
+                                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                            User user1=(User) adapterView.getItemAtPosition(i);
+                                            String item = user1.Full_Name;
+                                            //Toast.makeText(UserListActivity.this, item, Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(getContext(),ProfileActivity.class);
+                                            intent.putExtra("userObject",(User)userArrayList.get(i));
+                                            startActivity(intent);
+                                        }
+                                    }
+
+                            );
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
                     progressDialog.dismiss();
+                }
+
+                @Override
+                public void onCallbackString(String string) {
+
                 }
 
             });
@@ -86,47 +120,5 @@ public class student_list_fragment extends Fragment {
         }
     }
 
-
-    public void callMe() {
-
-        try {
-//
-//            Log.i("Size Of Array",userArrayList.size()+"");
-//            final User user = userArrayList.get(0);
-//
-//            Log.i("FullNAME", user.Full_Name);
-//            Log.i("ProfileImage",user.profileImage);
-
-
-            ArrayAdapter arrayAdapter = new CustomAdapter(getContext(), userArrayList);
-
-            ListAdapter shreeAdapter = new CustomAdapter(getContext(), userArrayList);
-            ListView shreeListView = (ListView) getView().findViewById(R.id.userListView);
-
-            shreeListView.setAdapter(shreeAdapter);
-
-            shreeListView.setOnItemClickListener(
-
-                    new AdapterView.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                            User user1=(User) adapterView.getItemAtPosition(i);
-                            String item = user1.Full_Name;
-                            //Toast.makeText(UserListActivity.this, item, Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(getContext(),ProfileActivity.class);
-                            intent.putExtra("userObject",userArrayList.get(i));
-                            startActivity(intent);
-                        }
-                    }
-
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }
