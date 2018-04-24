@@ -1,123 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="com.example.prateek.testmp.TestEntryActivity">
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ChildConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp"
-            android:text="Enter details of Test"
-            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Details of Test"
+            android:textColor="@color/colorBackground"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="42dp"
-            android:layout_toStartOf="@+id/textView2"
-            android:text="Name:-"
-            android:textSize="20sp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Name:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/TestNameEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.666" />
 
         <EditText
             android:id="@+id/TestNameEditText"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView4"
-            android:layout_below="@+id/textView3"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="Enter name of test"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/TotalQuestionEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.508" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView3"
-            android:layout_below="@+id/TestNameEditText"
-            android:layout_marginTop="19dp"
-            android:text="Total Question:-"
-            android:textSize="20sp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Total Question:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/TotalQuestionEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.084"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TestNameEditText"
+            app:layout_constraintVertical_bias="0.83" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/TotalQuestionEditText"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView4"
-            android:layout_below="@+id/textView4"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
+            android:hint="No. of Questions"
             android:inputType="numberSigned"
-            android:id="@+id/TotalQuestionEditText" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.387" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/TotalQuestionEditText"
-            android:layout_below="@+id/TotalQuestionEditText"
-            android:text="No. of Students for test "
-            android:textSize="20sp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="No. of Students giving test:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/TotalNoOfStudent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TestNameEditText"
+            app:layout_constraintVertical_bias="0.676" />
 
         <EditText
             android:id="@+id/TotalNoOfStudent"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/textView6"
-            android:layout_below="@+id/textView6"
-            android:layout_marginTop="11dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:hint="No. of Students"
+            android:inputType="numberSigned"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/NextButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TotalQuestionEditText"
+            app:layout_constraintVertical_bias="0.68" />
 
         <Button
             android:id="@+id/NextButton"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView6"
-            android:layout_below="@+id/TotalNoOfStudent"
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_properties"
             android:onClick="clickOnNextButton"
-            android:text="Next" />
-    </RelativeLayout>
+            android:text="Next"
+            android:textColor="@color/colorBackground"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TotalQuestionEditText"
+            app:layout_constraintVertical_bias="0.875" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
             android:id="@+id/button_addQuestion"
-            android:layout_width="127dp"
-            android:layout_height="49dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/button_properties"
             android:onClick="buttonClicked"
             android:text="Add Question"
+            android:textColor="@color/colorBackground"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+            app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            app:layout_constraintVertical_bias="0.682" />
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -133,14 +196,11 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="349dp"
-                android:layout_height="match_parent"
+                android:layout_height="230dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_question">
+                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/edit_text_option1"
@@ -151,7 +211,9 @@
                     android:ems="10"
                     android:hint="Option A"
                     android:inputType="textPersonName"
-                    android:textIsSelectable="false" />
+                    android:textColor="@color/colorPrimary"
+                    android:textIsSelectable="false"
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/edit_text_option2"
@@ -161,7 +223,9 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Option B"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/edit_text_option3"
@@ -171,7 +235,9 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Option C"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/edit_text_option4"
@@ -181,24 +247,92 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Option D"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
 
-                <EditText
-                    android:id="@+id/edit_text_correctOption"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Correct Option"
-                    android:inputType="textPersonName" />
 
             </LinearLayout>
         </ScrollView>
 
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="128dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Correct\nOption:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.025"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupOptions2"
+            android:layout_width="260dp"
+            android:layout_height="37dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:isScrollContainer="true"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/button_addQuestion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.546"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            app:layout_constraintVertical_bias="0.446">
+
+            <RadioButton
+                android:id="@+id/A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="A."
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="B."
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="C."
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="D."
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+        </RadioGroup>
+
         <EditText
             android:id="@+id/edit_text_question"
             android:layout_width="349dp"
-            android:layout_height="187dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="40dp"
@@ -206,6 +340,8 @@
             android:gravity="top"
             android:hint="Question"
             android:inputType="textPersonName"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -217,6 +353,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Question no :- "
+            android:textColor="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

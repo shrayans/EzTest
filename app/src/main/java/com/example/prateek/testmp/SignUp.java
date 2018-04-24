@@ -52,6 +52,7 @@ public class SignUp extends AppCompatActivity {
     EditText EmailEditText;
     EditText FullName;
     EditText PasswordEditText;
+    EditText RePasswordEditText;
     public Button AsATeacher,AsAStudent;
     public RelativeLayout UserTypeLayout;
     public ConstraintLayout constraintLayout;
@@ -116,6 +117,7 @@ public class SignUp extends AppCompatActivity {
         final String email=EmailEditText.getText().toString();
         final String Fullname=FullName.getText().toString();
         String password=PasswordEditText.getText().toString();
+        String rePassword=RePasswordEditText.getText().toString();
 
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -127,7 +129,16 @@ public class SignUp extends AppCompatActivity {
             return;
         }
         if(TextUtils.isEmpty(Fullname)){
-            Toast.makeText(this,"Please enter Fullname",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter Full Name",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(rePassword)){
+            Toast.makeText(this,"Please re-enter Password",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(!password.equals(rePassword)){
+            Toast.makeText(this,"Re-entered Password doesn't match",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -252,6 +263,7 @@ public class SignUp extends AppCompatActivity {
         EmailEditText = (EditText) findViewById(R.id.EmailEditText);
         FullName = (EditText) findViewById(R.id.FullName);
         PasswordEditText = (EditText) findViewById(R.id.PasswordEditText);
+        RePasswordEditText = findViewById(R.id.RePasswordEditText);
         UserTypeLayout=(RelativeLayout)findViewById(R.id.UserTypeLayout);
         constraintLayout=(ConstraintLayout)findViewById(R.id.ConstraintLayout);
         AsAStudent=(Button)findViewById(R.id.AsAStudent);
@@ -309,7 +321,7 @@ public class SignUp extends AppCompatActivity {
                 Uri selectedImage = data.getData();
                 bitmap = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes);
 
                 Log.e("Activity", "Pick from Camera::>>> ");
 

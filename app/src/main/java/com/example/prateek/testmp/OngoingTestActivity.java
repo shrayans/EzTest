@@ -249,7 +249,7 @@ public class OngoingTestActivity extends AppCompatActivity {
                     if(studentScoresArrayList.size()!=0) {
                         for (int i = 0; i < studentScoresArrayList.size(); i++) {
                             ScoreBoard scoreBoard = (ScoreBoard) studentScoresArrayList.get(i);
-                            scoresList.add(i, ((i + 1) + " " + scoreBoard.name + " : " + scoreBoard.marks));
+                            scoresList.add(i, ((i + 1) + ". " + scoreBoard.name + " : " + scoreBoard.marks));
 
 
                         }

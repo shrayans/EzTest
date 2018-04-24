@@ -7,6 +7,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +21,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     ImageView user_profile_photo;
     TextView user_profile_name;
-    TextView user_profile_email;
+    TextView user_profile_email,user_profile_short_bio;
+
 
     FirebaseStorage storage;
+    User user;
 
 
     @Override
@@ -36,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
 
-        User user=(User) intent.getSerializableExtra("userObject");
+       user =(User) intent.getSerializableExtra("userObject");
 
 
         if(!user.profileImage.equals("")) {
@@ -65,16 +68,55 @@ public class ProfileActivity extends AppCompatActivity {
 
         user_profile_name.setText(user.Full_Name);
         user_profile_email.setText(user_profile_email.getText()+user.email);
-
+        user_profile_short_bio.setText(user.userType);
         Log.i("Profile #####",user.UID);
+
+        user_profile_email.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                try{
+                    Intent intent=new Intent(Intent.ACTION_SEND);
+
+                    String[] recipients={user.email.toLowerCase()};
+                    intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+                    //intent.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
+                    //intent.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
+                    //intent.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");
+                    intent.setType("text/html");
+                    intent.setPackage("com.google.android.gm");
+                    startActivity(Intent.createChooser(intent, "Send mail"));
+                }catch (Exception e){
+
+                }
+                return true;
+            }
+        });
     }
 
+
+
+//    public void openGmail(View view){
+//       try{
+//            Intent intent=new Intent(Intent.ACTION_SEND);
+//
+//            String[] recipients={user.email.toLowerCase()};
+//            intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+//            //intent.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
+//            //intent.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
+//            //intent.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");
+//            intent.setType("text/html");
+//            intent.setPackage("com.google.android.gm");
+//            startActivity(Intent.createChooser(intent, "Send mail"));
+//        }catch (Exception e){
+//
+//       }}
 
     void getRefrence(){
 
         user_profile_photo=(ImageView)findViewById(R.id.user_profile_photo);
         user_profile_name=(TextView)findViewById(R.id.user_profile_name);
         user_profile_email=(TextView)findViewById(R.id.user_profile_email);
+        user_profile_short_bio=(TextView)findViewById(R.id.user_profile_short_bio);
 
     }
 }

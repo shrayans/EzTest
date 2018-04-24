@@ -108,8 +108,6 @@ public class HomeStudentActivity extends AppCompatActivity {
         });
     }
 
-
-    //menu code
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -127,6 +125,21 @@ public class HomeStudentActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.profile:
+
+                mDatabase.child("users").child("Student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user=dataSnapshot.getValue(User.class);
+                        Intent intent=new Intent(getApplicationContext(), ProfileActivity.class);
+                        intent.putExtra("userObject",(User)user);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 //setLanguage("English");
                 //Log.i("Selected","English");
 
@@ -136,6 +149,10 @@ public class HomeStudentActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent=new Intent(this,MainActivity.class);
                 startActivity(intent);
+
+                finishAffinity();
+
+
                 return true;
             default:
                 return false;
@@ -147,4 +164,5 @@ public class HomeStudentActivity extends AppCompatActivity {
 
         super.onBackPressed();
     }
+
 }

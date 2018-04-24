@@ -22,8 +22,10 @@
         </activity>
         <activity android:name=".SignUp" />
         <activity android:name=".TestEntryActivity" />
-        <activity android:name=".HomeTeacherActivity" />
-        <activity android:name=".HomeStudentActivity" />
+        <activity android:name=".HomeTeacherActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light"/>
+        <activity android:name=".HomeStudentActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light"/>
         <activity
             android:name=".UserListActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

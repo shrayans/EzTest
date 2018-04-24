@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/header_cover_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/header_profile_image" />
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
 
         <ImageButton
             android:id="@+id/user_profile_photo"
@@ -31,30 +26,21 @@
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header_cover_image"
-            android:background="#ebca0707"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="200dp"
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
 
-            <ImageView
-                android:id="@+id/add_friend"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="16dp"
-                android:layout_toEndOf="@+id/user_profile_short_bio"
-                android:src="@drawable/ic_action_user_add" />
-
             <!--<ImageView-->
-                <!--android:id="@+id/drop_down_option_menu"-->
-                <!--android:layout_width="30dp"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:src="@drawable/ic_action_overflow" />-->
+            <!--android:id="@+id/drop_down_option_menu"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:src="@drawable/ic_action_overflow" />-->
 
             <TextView
                 android:id="@+id/user_profile_name"
@@ -63,7 +49,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="76dp"
                 android:text="User Name"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -74,8 +60,7 @@
                 android:layout_below="@+id/user_profile_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:text="Working as a teacher"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -85,40 +70,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_layout"
             android:layout_marginTop="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:id="@+id/user_profile_email"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
+                android:longClickable="true"
                 android:padding="20dp"
-                android:text="Email:-" />
+                android:text="Email:-"
+                android:textColor="@color/colorBackground" />
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
-                android:background="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Android Profile XMl UI Design" />
+                android:text="Android Profile XMl UI Design"
+                android:textColor="@color/colorBackground"/>
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#fff"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Android Profile UI Design" />
+                android:text="Android Profile UI Design"
+                android:textColor="@color/colorBackground"/>
 
 
         </LinearLayout>

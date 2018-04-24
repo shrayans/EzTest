@@ -156,8 +156,41 @@ public class DBManager {
     }
 
     //called in getScoreList
-    private void getStudentNameFromUid(String Uid,final MyCallback myCallback) {
+    public void getStudentNameFromUid(String Uid,final MyCallback myCallback) {
 
+
+        Log.i("Position", "Inside getNamefromID");
+
+        try {
+
+            //final String[] name = new String[1];
+
+            mDatabase.child("users").child("Student").child(Uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    Log.e("Getting something", dataSnapshot.getKey());
+
+                    User user = dataSnapshot.getValue(User.class);
+                    Log.i("User", user.Full_Name);
+                    String name = user.Full_Name;
+                    Log.i("name[0]", name);
+                    myCallback.onCallbackString(name);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //return name[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        //return "";
+
+    public void getTeacherNameFromUid(String Uid,final MyCallback myCallback) {
 
 
         Log.i("Position","Inside getNamefromID");
@@ -166,7 +199,7 @@ public class DBManager {
 
             //final String[] name = new String[1];
 
-            mDatabase.child("users").child("Student").child(Uid).addValueEventListener(new ValueEventListener() {
+            mDatabase.child("users").child("Teachers").child(Uid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -186,6 +219,5 @@ public class DBManager {
             });
             //return name[0];
         }catch (Exception e){e.printStackTrace();}
-        //return "";
     }
 }

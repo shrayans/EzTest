@@ -1,7 +1,9 @@
 package com.example.prateek.testmp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     EditText UserEmailEditText;
     EditText PasswordEditText;
     ProgressDialog progressDialog;
+
+    SharedPreferences sharedPreferences;
 
 
     public void logIn(View view ){
@@ -99,10 +103,13 @@ public class MainActivity extends AppCompatActivity {
                                 String UID=currentFirebaseUser.getUid();
 
                                 if(key.equals(UID)){
+                                    sharedPreferences.edit().putString("USERTYPE",x).apply();
 
                                     Toast.makeText(MainActivity.this, "Details Matched !", Toast.LENGTH_LONG).show();
                                     //Intent intent = new Intent(MainActivity.this, TestEntryActivity.class);
                                     startActivity(intent);
+                                    finish();
+
                                     break;
                                 }
 
@@ -138,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void goToSignUpActicity(View view ){
+    public void goToSignUpActivity(View view ){
 
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
@@ -151,11 +158,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sharedPreferences = this.getSharedPreferences("com.example.prateek.testmp", Context.MODE_PRIVATE);
         //if user is already login
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            Intent intent = new Intent(MainActivity.this, HomeStudentActivity.class);
-            startActivity(intent);
+
+            Log.e("Shared",sharedPreferences.getString("USERTYPE",""));
+
+            if(sharedPreferences.getString("USERTYPE","").equals("Student")){
+                Intent intent = new Intent(MainActivity.this, HomeStudentActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else if(sharedPreferences.getString("USERTYPE","").equals("Teachers")){
+                Intent intent = new Intent(MainActivity.this, HomeTeacherActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+
         }
 
         UserEmailEditText=(EditText) findViewById(R.id.UserEmailEditText);
