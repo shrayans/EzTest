@@ -198,6 +198,7 @@ public class DBManager {
         try{
 
             //final String[] name = new String[1];
+            mDatabase=FirebaseDatabase.getInstance().getReference();
 
             mDatabase.child("users").child("Teachers").child(Uid).addValueEventListener(new ValueEventListener() {
                 @Override

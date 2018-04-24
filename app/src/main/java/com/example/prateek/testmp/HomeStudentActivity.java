@@ -42,6 +42,10 @@ public class HomeStudentActivity extends AppCompatActivity {
         testListView=findViewById(R.id.TestListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        testName.clear();
+        fullTestUID.clear();
+        testUID.clear();
+        testListView.clearTextFilter();
 
         try{
 
@@ -100,6 +104,7 @@ public class HomeStudentActivity extends AppCompatActivity {
                     Log.e("msg",fullTestUID.get(position));
 
                     startActivity(intent);
+                    finish();
 
                 }catch(Exception e){
                     e.printStackTrace();

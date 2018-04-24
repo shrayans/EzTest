@@ -74,33 +74,36 @@ public class TestEntryActivity extends AppCompatActivity {
                 buttonAddQuestion.setEnabled(false);
 
                 addQuestion();
+try {
+    String UID = firebaseAuth.getCurrentUser().getUid().toString();
+    final String childString = testName + "*" + UID;
 
-                String UID=firebaseAuth.getCurrentUser().getUid().toString();
-                String childString=testName+"*"+UID;
+    DBManager dbManager = new DBManager();
+    dbManager.getTeacherNameFromUid(UID, new MyCallback() {
+        @Override
+        public void onCallback(ArrayList<Object> value) {
+
+        }
+
+        @Override
+        public void onCallbackString(String string) {
+            nameOfTestCreator = string;
+            Log.i("TestUpdated",nameOfTestCreator.toString());
+
+            mDatabase.child("tests").child(childString).child("nameOfTestCreator").setValue(nameOfTestCreator.toString());
+            mDatabase.child("tests").child(childString).child("totalQuestions").setValue(maxQuestionNo);
+            mDatabase.child("tests").child(childString).child("totalNoOfStudents").setValue(totalNoOfStudent);
+
+            mDatabase.child("tests").child(childString).child("testQuestionDetails").setValue(testQuestionMap);
+            Log.i("TestUpdated","Test is on the firebase");
+        }
+    });
 
 
 
-                DBManager dbManager=new DBManager();
-                dbManager.getTeacherNameFromUid(UID, new MyCallback() {
-                    @Override
-                    public void onCallback(ArrayList<Object> value) {
-                        nameOfTestCreator=value;
-                    }
-
-                    @Override
-                    public void onCallbackString(String string) {
-
-                    }
-                });
-
-                mDatabase.child("tests").child(childString).child("totalQuestions").setValue(maxQuestionNo);
-                mDatabase.child("tests").child(childString).child("totalNoOfStudents").setValue(totalNoOfStudent);
-
-                mDatabase.child("tests").child(childString).child("testQuestionDetails").setValue(testQuestionMap);
-                mDatabase.child("tests").child(childString).child("nameOfTestCreator").setValue(nameOfTestCreator.toString());
-
-
-                //mDatabase.child("tests").setValue(testQuestionMap);
+}catch (Exception e){
+    e.printStackTrace();//mDatabase.child("tests").setValue(testQuestionMap);
+}
 
             }
             addQuestion();
@@ -110,23 +113,28 @@ public class TestEntryActivity extends AppCompatActivity {
 
 
     public void clickOnNextButton(View view){
-
+        try{
         testName=TestNameEditText.getText().toString();
         totalNoOfStudent=TotalNoOfStudent.getText().toString();
-        maxQuestionNo=Integer.parseInt(TotalQuestionEditText.getText().toString());
 
-        if(TextUtils.isEmpty(testName)||TextUtils.isEmpty(totalNoOfStudent)){
-            Toast.makeText(TestEntryActivity.this, "Please fill all fields", Toast.LENGTH_LONG).show();
-            if(maxQuestionNo<=0){
-                Toast.makeText(TestEntryActivity.this, "Total Question cant be less than 0", Toast.LENGTH_LONG).show();
-                return;
-            }
+
+
+        if(TextUtils.isEmpty(testName)||TextUtils.isEmpty(totalNoOfStudent)||TextUtils.isEmpty(TotalQuestionEditText.getText().toString() ) ){
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
+            return;
+        }
+            maxQuestionNo=0;
+            maxQuestionNo=Integer.parseInt(TotalQuestionEditText.getText().toString());
+        if(maxQuestionNo<=0){
+            Toast.makeText(TestEntryActivity.this, "Total Question cant be less than 0", Toast.LENGTH_LONG).show();
             return;
         }
 
         childConstraintLayout.setVisibility(View.INVISIBLE);
         constraintLayout.setVisibility(View.VISIBLE);
-
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void XMLReferences() {
