@@ -52,10 +52,11 @@ public class SignUp extends AppCompatActivity {
     EditText EmailEditText;
     EditText FullName;
     EditText PasswordEditText;
-    EditText RePasswordEditText;
+    EditText RePasswordEditText,ValidationString;
     public Button AsATeacher,AsAStudent;
     public RelativeLayout UserTypeLayout;
     public ConstraintLayout constraintLayout;
+
     //private Uri filePath;
 
     ImageView ProfileImageView;
@@ -114,10 +115,11 @@ public class SignUp extends AppCompatActivity {
 
     public void signUp(View view){
 
-        final String email=EmailEditText.getText().toString();
-        final String Fullname=FullName.getText().toString();
-        String password=PasswordEditText.getText().toString();
-        String rePassword=RePasswordEditText.getText().toString();
+        final String email=EmailEditText.getText().toString().trim();
+        final String Fullname=FullName.getText().toString().trim();
+        String password=PasswordEditText.getText().toString().trim();
+        String rePassword=RePasswordEditText.getText().toString().trim();
+//        String key= ValidationString.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -141,19 +143,28 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(this,"Re-entered Password doesn't match",Toast.LENGTH_LONG).show();
             return;
         }
-
+//        if(TextUtils.isEmpty(key)){
+//            Toast.makeText(this,"Please enter private key",Toast.LENGTH_LONG).show();
+//            return;
+//        }
         final Intent intent;
 
         if(UserType==0){
             //userTypeString="Teachers";
             intent=new Intent(SignUp.this,HomeTeacherActivity.class);
-
+//            if(!key.equals("654321")){
+//                Toast.makeText(this,"Private Key doesn,t match ! Try Aganin",Toast.LENGTH_LONG).show();
+//                return;
+//            }
         }
         else
         {
             //userTypeString="Student";
             intent=new Intent(SignUp.this,HomeStudentActivity.class);
-
+//            if(!key.equals("12345")){
+//                Toast.makeText(this,"Private Key doesn,t match ! Try Aganin",Toast.LENGTH_LONG).show();
+//                return;
+//            }
         }
 
 
@@ -268,6 +279,7 @@ public class SignUp extends AppCompatActivity {
         constraintLayout=(ConstraintLayout)findViewById(R.id.ConstraintLayout);
         AsAStudent=(Button)findViewById(R.id.AsAStudent);
         AsATeacher=(Button)findViewById(R.id.AsATeacher);
+       // ValidationString=(EditText) findViewById(R.id.ValidationString);
 
     }
 

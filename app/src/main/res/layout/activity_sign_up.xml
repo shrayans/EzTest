@@ -123,6 +123,19 @@
             app:layout_constraintTop_toBottomOf="@+id/PasswordEditText"
             app:layout_constraintVertical_bias="0.323" />
 
+        <!--<EditText-->
+        <!--android:id="@+id/ValidationString"-->
+        <!--android:layout_width="350dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:ems="10"-->
+        <!--android:hint="PRIVATE KEY"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:textSize="12sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/SignUpButton"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/RePasswordEditText"-->
+        <!--app:layout_constraintVertical_bias="0.323" />-->
     </android.support.constraint.ConstraintLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -146,7 +159,7 @@
             android:layout_centerHorizontal="true"
             android:text="Sign Up As:"
             android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/AsATeacher"

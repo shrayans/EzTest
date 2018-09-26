@@ -1,5 +1,8 @@
 package com.example.prateek.testmp;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -69,43 +74,62 @@ public class TestEntryActivity extends AppCompatActivity {
 
         if(questionNo<=maxQuestionNo) {
 
-            if(buttonAddQuestion.getText().toString().equals("Add & Finish")){
+                        if(buttonAddQuestion.getText().toString().equals("Add & Finish")){
 
-                buttonAddQuestion.setEnabled(false);
+                            buttonAddQuestion.setEnabled(false);
 
-                addQuestion();
-try {
-    String UID = firebaseAuth.getCurrentUser().getUid().toString();
-    final String childString = testName + "*" + UID;
+                            addQuestion();
+            try {
+                String UID = firebaseAuth.getCurrentUser().getUid().toString();
+                final String childString = testName + "*" + UID;
 
-    DBManager dbManager = new DBManager();
-    dbManager.getTeacherNameFromUid(UID, new MyCallback() {
-        @Override
-        public void onCallback(ArrayList<Object> value) {
+                DBManager dbManager = new DBManager();
+                dbManager.getTeacherNameFromUid(UID, new MyCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Object> value) {
 
-        }
+                    }
 
-        @Override
-        public void onCallbackString(String string) {
-            nameOfTestCreator = string;
-            Log.i("TestUpdated",nameOfTestCreator.toString());
+                    @Override
+                    public void onCallbackString(String string) {
+                        nameOfTestCreator = string;
+                        Log.i("TestUpdated",nameOfTestCreator.toString());
 
-            mDatabase.child("tests").child(childString).child("nameOfTestCreator").setValue(nameOfTestCreator.toString());
-            mDatabase.child("tests").child(childString).child("totalQuestions").setValue(maxQuestionNo);
-            mDatabase.child("tests").child(childString).child("totalNoOfStudents").setValue(totalNoOfStudent);
+                        mDatabase.child("tests").child(childString).child("nameOfTestCreator").setValue(nameOfTestCreator.toString());
+                        mDatabase.child("tests").child(childString).child("totalQuestions").setValue(maxQuestionNo);
+                        mDatabase.child("tests").child(childString).child("totalNoOfStudents").setValue(totalNoOfStudent);
 
-            mDatabase.child("tests").child(childString).child("testQuestionDetails").setValue(testQuestionMap);
-            Log.i("TestUpdated","Test is on the firebase");
-        }
-    });
+                        final ProgressDialog progressDialog;
+                        progressDialog = new ProgressDialog(getApplicationContext());
+
+                        progressDialog.setMessage("Please Wait! Uploading Test..");
+                        progressDialog.show();
+
+
+                        mDatabase.child("tests").child(childString).child("testQuestionDetails").setValue(testQuestionMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Your Test is uploaded succesfully!", Toast.LENGTH_LONG).show();
+                                Intent intent=new Intent(getApplicationContext(),HomeTeacherActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        Log.i("TestUpdated","Test is on the firebase");
+
+                        //finishAffinity();
+
+                    }
+                });
 
 
 
-}catch (Exception e){
-    e.printStackTrace();//mDatabase.child("tests").setValue(testQuestionMap);
-}
-
+            }catch (Exception e){
+                e.printStackTrace();//mDatabase.child("tests").setValue(testQuestionMap);
             }
+
+                        }
             addQuestion();
   }
 
